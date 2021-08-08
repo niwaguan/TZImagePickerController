@@ -76,6 +76,23 @@
 		B662C36F2662914D006A672A /* TZVideoEditedPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B662C36E2662914D006A672A /* TZVideoEditedPreviewController.m */; };
 		B662C37326629179006A672A /* TZVideoEditedPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B662C36E2662914D006A672A /* TZVideoEditedPreviewController.m */; };
 		B6977B0A265FDB280028BA31 /* TZVideoCropController.m in Sources */ = {isa = PBXBuildFile; fileRef = B606A9C2265FD53200F5493E /* TZVideoCropController.m */; };
+		D6E20C6726BD28F600FEE250 /* TZAlbumPickerOverview.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E20C6126BD28F500FEE250 /* TZAlbumPickerOverview.m */; };
+		D6E20C6826BD28F600FEE250 /* TZAlbumPickerOverview.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E20C6126BD28F500FEE250 /* TZAlbumPickerOverview.m */; };
+		D6E20C6926BD28F600FEE250 /* TZAlbumsSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E20C6226BD28F500FEE250 /* TZAlbumsSwitcher.m */; };
+		D6E20C6A26BD28F600FEE250 /* TZAlbumsSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E20C6226BD28F500FEE250 /* TZAlbumsSwitcher.m */; };
+		D6E20C6B26BD28F600FEE250 /* UIImage+MyBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E20C6326BD28F500FEE250 /* UIImage+MyBundle.m */; };
+		D6E20C6C26BD28F600FEE250 /* UIImage+MyBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E20C6326BD28F500FEE250 /* UIImage+MyBundle.m */; };
+		D6E20C6D26BD28F600FEE250 /* UIImage+MyBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E20C6426BD28F600FEE250 /* UIImage+MyBundle.h */; };
+		D6E20C6E26BD28F600FEE250 /* TZAlbumsSwitcher.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E20C6526BD28F600FEE250 /* TZAlbumsSwitcher.h */; };
+		D6E20C6F26BD28F600FEE250 /* TZAlbumPickerOverview.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E20C6626BD28F600FEE250 /* TZAlbumPickerOverview.h */; };
+		D6E20C7126BD293000FEE250 /* TZAlbumPickerOverviewElement.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E20C7026BD293000FEE250 /* TZAlbumPickerOverviewElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6E20C7626BFB49B00FEE250 /* UIColor+TZImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E20C7426BFB49B00FEE250 /* UIColor+TZImagePicker.h */; };
+		D6E20C7726BFB49B00FEE250 /* UIColor+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E20C7526BFB49B00FEE250 /* UIColor+TZImagePicker.m */; };
+		D6E20C7826BFB49B00FEE250 /* UIColor+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E20C7526BFB49B00FEE250 /* UIColor+TZImagePicker.m */; };
+		D6E20C7F26BFE7F800FEE250 /* UIButton+TZImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E20C7D26BFE7F800FEE250 /* UIButton+TZImagePicker.h */; };
+		D6E20C8026BFE7F800FEE250 /* UIButton+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E20C7E26BFE7F800FEE250 /* UIButton+TZImagePicker.m */; };
+		D6E20C8126BFE7F800FEE250 /* UIButton+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E20C7E26BFE7F800FEE250 /* UIButton+TZImagePicker.m */; };
+		D6E20C8326BFEC2900FEE250 /* TZViewControllerRotationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E20C8226BFEC2900FEE250 /* TZViewControllerRotationHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,6 +207,18 @@
 		B606A9C3265FD53200F5493E /* TZVideoCropController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZVideoCropController.h; sourceTree = "<group>"; };
 		B662C36D2662914D006A672A /* TZVideoEditedPreviewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TZVideoEditedPreviewController.h; sourceTree = "<group>"; };
 		B662C36E2662914D006A672A /* TZVideoEditedPreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TZVideoEditedPreviewController.m; sourceTree = "<group>"; };
+		D6E20C6126BD28F500FEE250 /* TZAlbumPickerOverview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZAlbumPickerOverview.m; sourceTree = "<group>"; };
+		D6E20C6226BD28F500FEE250 /* TZAlbumsSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZAlbumsSwitcher.m; sourceTree = "<group>"; };
+		D6E20C6326BD28F500FEE250 /* UIImage+MyBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MyBundle.m"; sourceTree = "<group>"; };
+		D6E20C6426BD28F600FEE250 /* UIImage+MyBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MyBundle.h"; sourceTree = "<group>"; };
+		D6E20C6526BD28F600FEE250 /* TZAlbumsSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAlbumsSwitcher.h; sourceTree = "<group>"; };
+		D6E20C6626BD28F600FEE250 /* TZAlbumPickerOverview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAlbumPickerOverview.h; sourceTree = "<group>"; };
+		D6E20C7026BD293000FEE250 /* TZAlbumPickerOverviewElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TZAlbumPickerOverviewElement.h; sourceTree = "<group>"; };
+		D6E20C7426BFB49B00FEE250 /* UIColor+TZImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+TZImagePicker.h"; sourceTree = "<group>"; };
+		D6E20C7526BFB49B00FEE250 /* UIColor+TZImagePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+TZImagePicker.m"; sourceTree = "<group>"; };
+		D6E20C7D26BFE7F800FEE250 /* UIButton+TZImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+TZImagePicker.h"; sourceTree = "<group>"; };
+		D6E20C7E26BFE7F800FEE250 /* UIButton+TZImagePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+TZImagePicker.m"; sourceTree = "<group>"; };
+		D6E20C8226BFEC2900FEE250 /* TZViewControllerRotationHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TZViewControllerRotationHandler.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +341,13 @@
 		900EEFF51C2BBF7600EA709B /* TZImagePickerController */ = {
 			isa = PBXGroup;
 			children = (
+				D6E20C7026BD293000FEE250 /* TZAlbumPickerOverviewElement.h */,
+				D6E20C6626BD28F600FEE250 /* TZAlbumPickerOverview.h */,
+				D6E20C6126BD28F500FEE250 /* TZAlbumPickerOverview.m */,
+				D6E20C6526BD28F600FEE250 /* TZAlbumsSwitcher.h */,
+				D6E20C6226BD28F500FEE250 /* TZAlbumsSwitcher.m */,
+				D6E20C6426BD28F600FEE250 /* UIImage+MyBundle.h */,
+				D6E20C6326BD28F500FEE250 /* UIImage+MyBundle.m */,
 				900EEFF61C2BBF9500EA709B /* TZImagePickerController.h */,
 				900EEFF71C2BBF9500EA709B /* TZImagePickerController.m */,
 				900EEFFC1C2BD58B00EA709B /* TZPhotoPickerController.h */,
@@ -346,6 +382,11 @@
 				9005E2B1257A462E002A8682 /* UIView+TZLayout.m */,
 				6D5358CB1D64600F00928CC6 /* NSBundle+TZImagePicker.h */,
 				6D5358CC1D64600F00928CC6 /* NSBundle+TZImagePicker.m */,
+				D6E20C7426BFB49B00FEE250 /* UIColor+TZImagePicker.h */,
+				D6E20C7526BFB49B00FEE250 /* UIColor+TZImagePicker.m */,
+				D6E20C7D26BFE7F800FEE250 /* UIButton+TZImagePicker.h */,
+				D6E20C7E26BFE7F800FEE250 /* UIButton+TZImagePicker.m */,
+				D6E20C8226BFEC2900FEE250 /* TZViewControllerRotationHandler.h */,
 				6DC358641CC8BAE300898D29 /* Resources */,
 			);
 			path = TZImagePickerController;
@@ -395,17 +436,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				901CC3FA21CB757500C55443 /* TZImageRequestOperation.h in Headers */,
+				D6E20C6F26BD28F600FEE250 /* TZAlbumPickerOverview.h in Headers */,
 				9F763A6B1FA0731E00D9E526 /* TZImagePickerController.h in Headers */,
+				D6E20C7F26BFE7F800FEE250 /* UIButton+TZImagePicker.h in Headers */,
 				9F763A6D1FA0733700D9E526 /* NSBundle+TZImagePicker.h in Headers */,
 				9F763A6C1FA0733100D9E526 /* TZAssetModel.h in Headers */,
+				D6E20C6D26BD28F600FEE250 /* UIImage+MyBundle.h in Headers */,
 				9F763A731FA0741D00D9E526 /* TZVideoPlayerController.h in Headers */,
 				9F763A741FA0741D00D9E526 /* TZGifPhotoPreviewController.h in Headers */,
+				D6E20C7626BFB49B00FEE250 /* UIColor+TZImagePicker.h in Headers */,
 				9005E2B5257A462E002A8682 /* UIView+TZLayout.h in Headers */,
 				9F763A761FA0741D00D9E526 /* TZImageManager.h in Headers */,
+				D6E20C8326BFEC2900FEE250 /* TZViewControllerRotationHandler.h in Headers */,
+				D6E20C7126BD293000FEE250 /* TZAlbumPickerOverviewElement.h in Headers */,
 				9F763A781FA0741D00D9E526 /* TZLocationManager.h in Headers */,
 				9F763A711FA0741D00D9E526 /* TZPhotoPreviewController.h in Headers */,
 				9F763A721FA0741D00D9E526 /* TZPhotoPreviewCell.h in Headers */,
 				9F763A701FA0741D00D9E526 /* TZAssetCell.h in Headers */,
+				D6E20C6E26BD28F600FEE250 /* TZAlbumsSwitcher.h in Headers */,
 				9F763A6F1FA0741D00D9E526 /* TZPhotoPickerController.h in Headers */,
 				9F763A751FA0741D00D9E526 /* TZProgressView.h in Headers */,
 				9F763A771FA0741D00D9E526 /* TZImageCropManager.h in Headers */,
@@ -499,7 +547,7 @@
 				TargetAttributes = {
 					900E657B1C2BB8D5003D9A9E = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = LTFQDC2QVX;
+						DevelopmentTeam = WWUQ39R3UV;
 						ProvisioningStyle = Automatic;
 					};
 					900E65941C2BB8D5003D9A9E = {
@@ -593,10 +641,12 @@
 				900EF0021C2BD7E400EA709B /* TZAssetCell.m in Sources */,
 				6DD0502B1DF659ED0057C78D /* TZProgressView.m in Sources */,
 				6D32B9BD1CD83640005CE1E0 /* LxGridViewFlowLayout.m in Sources */,
+				D6E20C7726BFB49B00FEE250 /* UIColor+TZImagePicker.m in Sources */,
 				6D4608311DFFC60D004FB009 /* TZGifPhotoPreviewController.m in Sources */,
 				900EF0161C2C134900EA709B /* TZPhotoPreviewCell.m in Sources */,
 				900E65871C2BB8D5003D9A9E /* ViewController.m in Sources */,
 				90CE84AE1C3A89EF003D0779 /* TZImageManager.m in Sources */,
+				D6E20C6726BD28F600FEE250 /* TZAlbumPickerOverview.m in Sources */,
 				901F2295215CABD600F604ED /* FLAnimatedImage.m in Sources */,
 				900E65841C2BB8D5003D9A9E /* AppDelegate.m in Sources */,
 				9005E2B3257A462E002A8682 /* UIView+TZLayout.m in Sources */,
@@ -608,7 +658,10 @@
 				901CC3FC21CB758500C55443 /* TZImageRequestOperation.m in Sources */,
 				6D5358CD1D64600F00928CC6 /* NSBundle+TZImagePicker.m in Sources */,
 				900EEFF81C2BBF9500EA709B /* TZImagePickerController.m in Sources */,
+				D6E20C8026BFE7F800FEE250 /* UIButton+TZImagePicker.m in Sources */,
 				902938D81EE2D02C000F2F8F /* TZLocationManager.m in Sources */,
+				D6E20C6B26BD28F600FEE250 /* UIImage+MyBundle.m in Sources */,
+				D6E20C6926BD28F600FEE250 /* TZAlbumsSwitcher.m in Sources */,
 				6DC84D0A1DF5358500A107A9 /* TZImageCropManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -634,9 +687,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B662C37326629179006A672A /* TZVideoEditedPreviewController.m in Sources */,
+				D6E20C6C26BD28F600FEE250 /* UIImage+MyBundle.m in Sources */,
+				D6E20C7826BFB49B00FEE250 /* UIColor+TZImagePicker.m in Sources */,
 				B6977B0A265FDB280028BA31 /* TZVideoCropController.m in Sources */,
 				901CC3FB21CB757500C55443 /* TZImageRequestOperation.m in Sources */,
 				9F763A501FA072E500D9E526 /* TZImagePickerController.m in Sources */,
+				D6E20C6826BD28F600FEE250 /* TZAlbumPickerOverview.m in Sources */,
+				D6E20C8126BFE7F800FEE250 /* UIButton+TZImagePicker.m in Sources */,
+				D6E20C6A26BD28F600FEE250 /* TZAlbumsSwitcher.m in Sources */,
 				9F763A521FA072E500D9E526 /* TZPhotoPickerController.m in Sources */,
 				9F763A541FA072E500D9E526 /* TZAssetCell.m in Sources */,
 				9F763A561FA072E500D9E526 /* TZAssetModel.m in Sources */,
@@ -815,7 +873,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LTFQDC2QVX;
+				DEVELOPMENT_TEAM = WWUQ39R3UV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TZImagePickerController",
@@ -839,7 +897,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LTFQDC2QVX;
+				DEVELOPMENT_TEAM = WWUQ39R3UV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TZImagePickerController",

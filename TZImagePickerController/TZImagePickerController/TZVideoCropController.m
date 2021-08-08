@@ -12,6 +12,7 @@
 #import "TZImageManager.h"
 #import "TZAssetModel.h"
 #import "TZImagePickerController.h"
+#import "UIImage+MyBundle.h"
 
 @interface TZVideoCropController ()<TZVideoEditViewDelegate,UICollectionViewDelegate, UICollectionViewDataSource> {
     AVPlayer *_player;

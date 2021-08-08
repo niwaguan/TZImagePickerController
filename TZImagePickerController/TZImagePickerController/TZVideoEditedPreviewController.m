@@ -11,6 +11,7 @@
 #import "TZImageManager.h"
 #import "TZImagePickerController.h"
 #import "UIView+TZLayout.h"
+#import "UIImage+MyBundle.h"
 
 @interface TZVideoEditedPreviewController () {
     AVPlayer *_player;

@@ -13,6 +13,9 @@
 #import "TZImagePickerController.h"
 #import "TZImageManager.h"
 #import "TZImageCropManager.h"
+#import "UIImage+MyBundle.h"
+#import "UIColor+TZImagePicker.h"
+#import "UIButton+TZImagePicker.h"
 
 @interface TZPhotoPreviewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate> {
     UICollectionView *_collectionView;
@@ -60,7 +63,9 @@
     }
     [self configCollectionView];
     [self configCustomNaviBar];
-    [self configBottomToolBar];
+    if (_tzImagePickerVc.maxImagesCount <= 1) {
+        [self configBottomToolBar];
+    }
     self.view.clipsToBounds = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeStatusBarOrientationNotification:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
@@ -103,7 +108,7 @@
     TZImagePickerController *tzImagePickerVc = (TZImagePickerController *)self.navigationController;
     
     _naviBar = [[UIView alloc] initWithFrame:CGRectZero];
-    _naviBar.backgroundColor = [UIColor colorWithRed:(34/255.0) green:(34/255.0)  blue:(34/255.0) alpha:0.7];
+    _naviBar.backgroundColor = [UIColor.navigationBarBackgroundColor colorWithAlphaComponent:0.5];
     
     _backButton = [[UIButton alloc] initWithFrame:CGRectZero];
     [_backButton setImage:[UIImage tz_imageNamedFromMyBundle:@"navi_back"] forState:UIControlStateNormal];
@@ -122,7 +127,7 @@
     _indexLabel = [[UILabel alloc] init];
     _indexLabel.adjustsFontSizeToFitWidth = YES;
     _indexLabel.font = [UIFont systemFontOfSize:14];
-    _indexLabel.textColor = [UIColor whiteColor];
+    _indexLabel.textColor = UIColor.themeHighlightForegroundColor;
     _indexLabel.textAlignment = NSTextAlignmentCenter;
     
     [_naviBar addSubview:_selectButton];
@@ -133,8 +138,7 @@
 
 - (void)configBottomToolBar {
     _toolBar = [[UIView alloc] initWithFrame:CGRectZero];
-    static CGFloat rgb = 34 / 255.0;
-    _toolBar.backgroundColor = [UIColor colorWithRed:rgb green:rgb blue:rgb alpha:0.7];
+    _toolBar.backgroundColor = UIColor.popupBackgroundColor;
     
     TZImagePickerController *_tzImagePickerVc = (TZImagePickerController *)self.navigationController;
     if (_tzImagePickerVc.allowPickingOriginalPhoto) {
@@ -158,11 +162,8 @@
         if (_isSelectOriginalPhoto) [self showPhotoBytes];
     }
     
-    _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _doneButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    _doneButton = [UIButton doneButton];
     [_doneButton addTarget:self action:@selector(doneButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    [_doneButton setTitle:_tzImagePickerVc.doneBtnTitleStr forState:UIControlStateNormal];
-    [_doneButton setTitleColor:_tzImagePickerVc.oKButtonTitleColorNormal forState:UIControlStateNormal];
     
     _numberImageView = [[UIImageView alloc] initWithImage:_tzImagePickerVc.photoNumberIconImage];
     _numberImageView.backgroundColor = [UIColor clearColor];
@@ -199,7 +200,7 @@
     _layout = [[UICollectionViewFlowLayout alloc] init];
     _layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_layout];
-    _collectionView.backgroundColor = [UIColor blackColor];
+    _collectionView.backgroundColor = UIColor.viewControllerBackgroundColor;
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     _collectionView.pagingEnabled = YES;
@@ -288,7 +289,8 @@
         _originalPhotoLabel.frame = CGRectMake(fullImageWidth + 42, 0, 80, 44);
     }
     [_doneButton sizeToFit];
-    _doneButton.frame = CGRectMake(self.view.tz_width - _doneButton.tz_width - 12, 0, MAX(44, _doneButton.tz_width), 44);
+    
+    _doneButton.frame = CGRectMake(self.view.tz_width - _doneButton.tz_width - 16, (_toolBar.tz_height - [TZCommonTools tz_safeAreaInsets].bottom - _doneButton.tz_height) / 2, _doneButton.tz_width, _doneButton.tz_height);
     _numberImageView.frame = CGRectMake(_doneButton.tz_left - 24 - 5, 10, 24, 24);
     _numberLabel.frame = _numberImageView.frame;
     

@@ -12,6 +12,8 @@
 #import "TZImageManager.h"
 #import "TZImagePickerController.h"
 #import "TZProgressView.h"
+#import "UIImage+MyBundle.h"
+#import "UIColor+TZImagePicker.h"
 
 @interface TZAssetCell ()
 @property (weak, nonatomic) UIImageView *imageView;       // The photo / 照片
@@ -31,6 +33,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:@"TZ_PHOTO_PICKER_RELOAD_NOTIFICATION" object:nil];
+    self.contentView.backgroundColor = UIColor.viewControllerBackgroundColor;
     return self;
 }
 
@@ -328,9 +331,9 @@
 - (UILabel *)indexLabel {
     if (_indexLabel == nil) {
         UILabel *indexLabel = [[UILabel alloc] init];
-        indexLabel.font = [UIFont systemFontOfSize:14];
+        indexLabel.font = [UIFont boldSystemFontOfSize:14];
         indexLabel.adjustsFontSizeToFitWidth = YES;
-        indexLabel.textColor = [UIColor whiteColor];
+        indexLabel.textColor = UIColor.themeHighlightForegroundColor;
         indexLabel.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:indexLabel];
         _indexLabel = indexLabel;
@@ -395,6 +398,8 @@
 @interface TZAlbumCell ()
 @property (weak, nonatomic) UIImageView *posterImageView;
 @property (weak, nonatomic) UILabel *titleLabel;
+/// 选中标识
+@property (nonatomic, readwrite, strong) UIImageView *selectedIndicatorView;
 @end
 
 @implementation TZAlbumCell
@@ -402,31 +407,31 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     self.backgroundColor = [UIColor whiteColor];
-    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    self.accessoryType = UITableViewCellAccessoryNone;
+    self.contentView.backgroundColor = UIColor.viewControllerBackgroundColor;
     return self;
 }
 
 - (void)setModel:(TZAlbumModel *)model {
     _model = model;
     
-    UIColor *nameColor = UIColor.blackColor;
-    if (@available(iOS 13.0, *)) {
-        nameColor = UIColor.labelColor;
-    }
+    UIColor *nameColor = UIColor.titleColor;
     NSMutableAttributedString *nameString = [[NSMutableAttributedString alloc] initWithString:model.name attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16],NSForegroundColorAttributeName:nameColor}];
-    NSAttributedString *countString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"  (%zd)",model.count] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16],NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
+    NSAttributedString *countString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"  (%zd)",model.count] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16],NSForegroundColorAttributeName:UIColor.subTitleColor}];
     [nameString appendAttributedString:countString];
     self.titleLabel.attributedText = nameString;
     [[TZImageManager manager] getPostImageWithAlbumModel:model completion:^(UIImage *postImage) {
         self.posterImageView.image = postImage;
         [self setNeedsLayout];
     }];
-    if (model.selectedCount) {
-        self.selectedCountButton.hidden = NO;
-        [self.selectedCountButton setTitle:[NSString stringWithFormat:@"%zd",model.selectedCount] forState:UIControlStateNormal];
-    } else {
-        self.selectedCountButton.hidden = YES;
-    }
+//    if (model.selectedCount) {
+//        self.selectedCountButton.hidden = NO;
+//        [self.selectedCountButton setTitle:[NSString stringWithFormat:@"%zd",model.selectedCount] forState:UIControlStateNormal];
+//    } else {
+//        self.selectedCountButton.hidden = YES;
+//    }
+    
+    self.selectedCountButton.hidden = YES;
     
     if (self.albumCellDidSetModelBlock) {
         self.albumCellDidSetModelBlock(self, _posterImageView, _titleLabel);
@@ -437,9 +442,10 @@
     [super layoutSubviews];
     _selectedCountButton.frame = CGRectMake(self.contentView.tz_width - 24, 23, 24, 24);
     NSInteger titleHeight = ceil(self.titleLabel.font.lineHeight);
-    self.titleLabel.frame = CGRectMake(80, (self.tz_height - titleHeight) / 2, self.tz_width - 80 - 50, titleHeight);
-    self.posterImageView.frame = CGRectMake(0, 0, 70, 70);
-    
+    self.titleLabel.frame = CGRectMake(92, (self.tz_height - titleHeight) / 2, self.tz_width - 80 - 50, titleHeight);
+    self.posterImageView.frame = CGRectMake(16, 8, 60, 60);
+    CGFloat indicatorSize = 16;
+    self.selectedIndicatorView.frame = CGRectMake(self.contentView.tz_width - 16 - indicatorSize, (self.contentView.tz_height - indicatorSize) / 2, indicatorSize, indicatorSize);
     if (self.albumCellDidLayoutSubviewsBlock) {
         self.albumCellDidLayoutSubviewsBlock(self, _posterImageView, _titleLabel);
     }
@@ -491,6 +497,17 @@
         _selectedCountButton = selectedCountButton;
     }
     return _selectedCountButton;
+}
+
+- (UIImageView *)selectedIndicatorView {
+    if (!_selectedIndicatorView) {
+        _selectedIndicatorView = [[UIImageView alloc] init];
+        [self.contentView addSubview:_selectedIndicatorView];
+        _selectedIndicatorView.image = [UIImage tz_imageNamedFromMyBundle:@"album-indicator"];
+        _selectedIndicatorView.hidden = YES;
+        _selectedIndicatorView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    return _selectedIndicatorView;
 }
 
 @end

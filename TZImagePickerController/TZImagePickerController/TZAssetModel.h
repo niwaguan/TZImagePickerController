@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
+#import "TZAlbumPickerOverviewElement.h"
 
 typedef enum : NSUInteger {
     TZAssetModelMediaTypePhoto = 0,
@@ -19,7 +20,7 @@ typedef enum : NSUInteger {
 } TZAssetModelMediaType;
 
 @class PHAsset;
-@interface TZAssetModel : NSObject
+@interface TZAssetModel : NSObject <TZAlbumPickerOverviewElement>
 
 @property (nonatomic, strong) PHAsset *asset;
 @property (nonatomic, assign) BOOL isSelected;      ///< The select status of a photo, default is No

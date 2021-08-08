@@ -25,6 +25,7 @@
 #import "TZLocationManager.h"
 #import "TZPhotoPreviewController.h"
 #import "TZPhotoPreviewCell.h"
+#import "TZViewControllerRotationHandler.h"
 
 @class TZAlbumCell, TZAssetCell;
 @protocol TZImagePickerControllerDelegate;
@@ -39,6 +40,10 @@
 - (instancetype)initWithSelectedAssets:(NSMutableArray *)selectedAssets selectedPhotos:(NSMutableArray *)selectedPhotos index:(NSInteger)index;
 /// This init method for crop photo / 用这个初始化方法以裁剪图片
 - (instancetype)initCropTypeWithAsset:(PHAsset *)asset photo:(UIImage *)photo completion:(void (^)(UIImage *cropImage,PHAsset *asset))completion;
+
+#pragma mark - rotation
+/// rotation
+@property (nonatomic, readwrite, weak) id<TZViewControllerRotationHandler> rotationHandler;
 
 #pragma mark -
 /// Default is 9 / 默认最大可选9张图片
@@ -337,18 +342,23 @@
 - (BOOL)isAssetCanBeSelected:(PHAsset *)asset;
 @end
 
+@class TZAlbumPickerController;
+
+@protocol TZAlbumPickerControllerDelegate <NSObject>
+
+- (void)albumPickerController:(TZAlbumPickerController *)controller didSelectAlbum:(TZAlbumModel *)album;
+
+@end
 
 @interface TZAlbumPickerController : UIViewController
 @property (nonatomic, assign) NSInteger columnNumber;
 @property (assign, nonatomic) BOOL isFirstAppear;
 - (void)configTableView;
+/// delegate
+@property (nonatomic, readwrite, weak) id<TZAlbumPickerControllerDelegate> delegate;
+/// 已经选中的相册，用于回显
+@property (nonatomic, readwrite, strong) TZAlbumModel *selectedAlbum;
 @end
-
-
-@interface UIImage (MyBundle)
-+ (UIImage *)tz_imageNamedFromMyBundle:(NSString *)name;
-@end
-
 
 @interface TZCommonTools : NSObject
 + (UIEdgeInsets)tz_safeAreaInsets;

@@ -11,6 +11,10 @@
 
 @implementation TZAssetModel
 
+- (UIImage *)coverImage {
+    return nil;
+}
+
 + (instancetype)modelWithAsset:(PHAsset *)asset type:(TZAssetModelMediaType)type{
     TZAssetModel *model = [[TZAssetModel alloc] init];
     model.asset = asset;

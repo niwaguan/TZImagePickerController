@@ -14,13 +14,15 @@
 #import "TZImageCropManager.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "TZImagePickerController.h"
+#import "UIImage+MyBundle.h"
+#import "UIColor+TZImagePicker.h"
 
 @implementation TZAssetPreviewCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = UIColor.viewControllerBackgroundColor;
         [self configSubviews];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoPreviewCollectionViewDidScroll) name:@"photoPreviewCollectionViewDidScroll" object:nil];
     }
