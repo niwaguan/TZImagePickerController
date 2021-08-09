@@ -62,7 +62,7 @@
     self.selectPhotoButton.selected = model.isSelected;
     self.selectImageView.image = self.selectPhotoButton.isSelected ? self.photoSelImage : self.photoDefImage;
     self.indexLabel.hidden = !self.selectPhotoButton.isSelected;
-    
+    self.selectedMaskView.hidden = !model.isSelected;
     self.type = (NSInteger)model.type;
     // 让宽度/高度小于 最小可选照片尺寸 的图片不能选中
     if (![[TZImageManager manager] isPhotoSelectableWithAsset:model.asset]) {
@@ -456,7 +456,7 @@
     [super layoutSubviews];
     _selectedCountButton.frame = CGRectMake(self.contentView.tz_width - 24, 23, 24, 24);
     NSInteger titleHeight = ceil(self.titleLabel.font.lineHeight);
-    self.titleLabel.frame = CGRectMake(92, (self.tz_height - titleHeight) / 2, self.tz_width - 80 - 50, titleHeight);
+    self.titleLabel.frame = CGRectMake(92, (self.tz_height - titleHeight) / 2, self.tz_width - self.posterImageView.tz_right - 16 - 16 - 24, titleHeight);
     self.posterImageView.frame = CGRectMake(16, 8, 60, 60);
     CGFloat indicatorSize = 16;
     self.selectedIndicatorView.frame = CGRectMake(self.contentView.tz_width - 16 - indicatorSize, (self.contentView.tz_height - indicatorSize) / 2, indicatorSize, indicatorSize);
