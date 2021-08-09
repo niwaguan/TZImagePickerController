@@ -290,7 +290,11 @@ static CGFloat itemMargin = 2;
     }
     _collectionView.frame = CGRectMake(0, top, self.view.tz_width, collectionViewHeight);
     _noDataLabel.frame = _collectionView.bounds;
-    CGFloat itemWH = (self.view.tz_width - (self.columnNumber + 1) * itemMargin) / self.columnNumber;
+    NSInteger columns = self.columnNumber;
+    if (self.view.tz_width > self.view.tz_height) {
+        columns *= 2;
+    }
+    CGFloat itemWH = (self.view.tz_width - (columns + 1) * itemMargin) / columns;
     _layout.itemSize = CGSizeMake(itemWH, itemWH);
     _layout.minimumInteritemSpacing = itemMargin;
     _layout.minimumLineSpacing = itemMargin;
