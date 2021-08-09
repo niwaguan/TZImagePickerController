@@ -643,6 +643,13 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }
 
+- (void)setNotPreviewAndJustReturnWhenSingleSelection:(BOOL)notPreviewAndJustReturnWhenSingleSelection {
+    _notPreviewAndJustReturnWhenSingleSelection = notPreviewAndJustReturnWhenSingleSelection;
+    if (notPreviewAndJustReturnWhenSingleSelection) {
+        self.allowPreview = NO;
+    }
+}
+
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     viewController.automaticallyAdjustsScrollViewInsets = NO;
     [super pushViewController:viewController animated:animated];

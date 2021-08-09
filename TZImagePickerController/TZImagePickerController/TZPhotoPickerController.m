@@ -518,7 +518,30 @@ static CGFloat itemMargin = 2;
     cell.allowPickingGif = tzImagePickerVc.allowPickingGif;
     cell.model = model;
     if (model.isSelected && tzImagePickerVc.showSelectedIndex) {
-        cell.index = [tzImagePickerVc.selectedAssetIds indexOfObject:model.asset.localIdentifier] + 1;
+        NSInteger index = [tzImagePickerVc.selectedAssetIds indexOfObject:model.asset.localIdentifier];
+        if (index != NSNotFound) {
+            cell.index = index + 1;
+        } else {
+            // 未找到需要更新状态
+            NSAssert(true, @"模型的isSelected属性为true，但索引未找到？？？");
+            model.isSelected = NO;
+            cell.model = model;
+            NSArray *selectedModels = [NSArray arrayWithArray:tzImagePickerVc.selectedModels];
+            for (TZAssetModel *model_item in selectedModels) {
+                if ([model.asset.localIdentifier isEqualToString:model_item.asset.localIdentifier]) {
+                    [tzImagePickerVc removeSelectedModel:model_item];
+                    [self setAsset:model_item.asset isSelect:NO];
+                    break;
+                }
+            }
+            if (tzImagePickerVc.showSelectedIndex || tzImagePickerVc.showPhotoCannotSelectLayer) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TZ_PHOTO_PICKER_RELOAD_NOTIFICATION" object:self.navigationController];
+            }
+            if (model.iCloudFailed) {
+                NSString *title = [NSBundle tz_localizedStringForKey:@"iCloud sync failed"];
+                [tzImagePickerVc showAlertWithTitle:title];
+            }
+        }
     }
     cell.showSelectBtn = tzImagePickerVc.showSelectBtn;
     cell.allowPreview = tzImagePickerVc.allowPreview;
@@ -632,8 +655,12 @@ static CGFloat itemMargin = 2;
             photoPreviewVc.models = self->_models;
             [self pushPhotoPrevireViewController:photoPreviewVc];
         };
+        if (tzImagePickerVc.maxImagesCount <= 1 && tzImagePickerVc.notPreviewAndJustReturnWhenSingleSelection) {
+            TZAssetCell *cell = (TZAssetCell *)[collectionView cellForItemAtIndexPath:indexPath];
+            [cell selectPhotoButtonClick:cell.selectPhotoButton];
+        }
         /// 单选的自定义裁剪
-        if (tzImagePickerVc.maxImagesCount <= 1 &&
+        else if (tzImagePickerVc.maxImagesCount <= 1 &&
             tzImagePickerVc.allowCrop &&
             tzImagePickerVc.cropperProvider) {
             /// 获取照片进行裁剪
@@ -1139,6 +1166,8 @@ static CGFloat itemMargin = 2;
     if (_model != model) {
         _model = model;
         [self updateNavigationTitleView];
+        _shouldScrollToBottom = YES;
+        [self fetchAssetModels];
     }
 }
 
