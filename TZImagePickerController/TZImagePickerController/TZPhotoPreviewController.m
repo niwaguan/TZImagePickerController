@@ -169,7 +169,8 @@
     _numberImageView.backgroundColor = [UIColor clearColor];
     _numberImageView.clipsToBounds = YES;
     _numberImageView.contentMode = UIViewContentModeScaleAspectFit;
-    _numberImageView.hidden = _tzImagePickerVc.selectedModels.count <= 0;
+//    _numberImageView.hidden = _tzImagePickerVc.selectedModels.count <= 0;
+    _numberImageView.hidden = YES;
     
     _numberLabel = [[UILabel alloc] init];
     _numberLabel.font = [UIFont systemFontOfSize:15];
@@ -177,7 +178,8 @@
     _numberLabel.textColor = [UIColor whiteColor];
     _numberLabel.textAlignment = NSTextAlignmentCenter;
     _numberLabel.text = [NSString stringWithFormat:@"%zd",_tzImagePickerVc.selectedModels.count];
-    _numberLabel.hidden = _tzImagePickerVc.selectedModels.count <= 0;
+//    _numberLabel.hidden = _tzImagePickerVc.selectedModels.count <= 0;
+    _numberLabel.hidden = YES;
     _numberLabel.backgroundColor = [UIColor clearColor];
     _numberLabel.userInteractionEnabled = YES;
     
