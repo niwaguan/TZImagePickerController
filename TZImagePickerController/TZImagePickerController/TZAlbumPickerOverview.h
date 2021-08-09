@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 
+- (void)albumPickerOverview:(TZAlbumPickerOverview *)view clickAtIndex:(NSInteger)index;
 - (void)albumPickerOverview:(TZAlbumPickerOverview *)view requireDeleteAtIndex:(NSInteger)index;
 - (void)albumPickerOverviewConfirmed:(TZAlbumPickerOverview *)view;
 

@@ -190,6 +190,13 @@
     cell.delegate = self;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(albumPickerOverview:clickAtIndex:)]) {
+        [self.delegate albumPickerOverview:self clickAtIndex:indexPath.item];
+    }
+}
+
 #pragma mark -
 
 - (void)setElements:(NSArray<id<TZAlbumPickerOverviewElement>> *)elements {

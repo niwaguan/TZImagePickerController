@@ -700,6 +700,14 @@ static CGFloat itemMargin = 2;
     }
 }
 
+- (void)albumPickerOverview:(TZAlbumPickerOverview *)view clickAtIndex:(NSInteger)index {
+    TZImagePickerController *tzImagePickerVc = (TZImagePickerController *)self.navigationController;
+    TZPhotoPreviewController *photoPreviewVc = [[TZPhotoPreviewController alloc] init];
+    photoPreviewVc.currentIndex = index;
+    photoPreviewVc.models = tzImagePickerVc.selectedModels.mutableCopy;
+    [self pushPhotoPrevireViewController:photoPreviewVc];
+}
+
 #pragma mark -
 
 - (void)albumsSwitcher:(TZAlbumsSwitcher *)switcher didChangeTo:(TZAlbumsSwitcherStatus)status {
