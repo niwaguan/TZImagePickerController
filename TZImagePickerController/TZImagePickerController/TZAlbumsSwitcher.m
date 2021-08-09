@@ -35,6 +35,8 @@
     switcher.titleLabel = label;
     label.font = [UIFont systemFontOfSize:18];
     label.textColor = UIColor.whiteColor;
+    label.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:200].active = YES;
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage tz_imageNamedFromMyBundle:@"switcher-indicator"]];
     [switcher addArrangedSubview:imageView];
