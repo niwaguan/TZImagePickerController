@@ -143,6 +143,7 @@
         self.didSelectPhotoBlock(sender.isSelected);
     }
     self.selectImageView.image = sender.isSelected ? self.photoSelImage : self.photoDefImage;
+    self.selectedMaskView.hidden = !sender.isSelected;
     if (sender.isSelected) {
         [UIView showOscillatoryAnimationWithLayer:_selectImageView.layer type:TZOscillatoryAnimationToBigger];
         // 用户选中了该图片，提前获取一下大图
@@ -257,6 +258,18 @@
         _selectPhotoButton = selectPhotoButton;
     }
     return _selectPhotoButton;
+}
+
+- (UIView *)selectedMaskView {
+    if (!_selectedMaskView) {
+        _selectedMaskView = [[UIView alloc] init];
+        _selectedMaskView.hidden = YES;
+        [self.contentView insertSubview:_selectedMaskView belowSubview:self.selectPhotoButton];
+        _selectedMaskView.frame = self.contentView.bounds;
+        _selectedMaskView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _selectedMaskView.backgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.5];
+    }
+    return _selectedMaskView;
 }
 
 - (UIImageView *)imageView {
@@ -406,9 +419,10 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    self.backgroundColor = [UIColor whiteColor];
     self.accessoryType = UITableViewCellAccessoryNone;
+    self.backgroundColor = UIColor.viewControllerBackgroundColor;
     self.contentView.backgroundColor = UIColor.viewControllerBackgroundColor;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     return self;
 }
 

@@ -20,6 +20,8 @@ typedef enum : NSUInteger {
 @class TZAssetModel;
 @interface TZAssetCell : UICollectionViewCell
 @property (weak, nonatomic) UIButton *selectPhotoButton;
+/// 选中的半透明遮罩
+@property (nonatomic, readwrite, strong) UIView *selectedMaskView;
 @property (weak, nonatomic) UIButton *cannotSelectLayerButton;
 @property (nonatomic, strong) TZAssetModel *model;
 @property (assign, nonatomic) NSInteger index;
