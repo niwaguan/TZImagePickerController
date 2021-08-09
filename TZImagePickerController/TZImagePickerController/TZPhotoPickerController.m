@@ -622,10 +622,38 @@ static CGFloat itemMargin = 2;
             [self.navigationController pushViewController:gifPreviewVc animated:YES];
         }
     } else {
-        TZPhotoPreviewController *photoPreviewVc = [[TZPhotoPreviewController alloc] init];
-        photoPreviewVc.currentIndex = index;
-        photoPreviewVc.models = _models;
-        [self pushPhotoPrevireViewController:photoPreviewVc];
+        void (^defaultAction)(void) = ^{
+            TZPhotoPreviewController *photoPreviewVc = [[TZPhotoPreviewController alloc] init];
+            photoPreviewVc.currentIndex = index;
+            photoPreviewVc.models = self->_models;
+            [self pushPhotoPrevireViewController:photoPreviewVc];
+        };
+        /// 单选的自定义裁剪
+        if (tzImagePickerVc.maxImagesCount <= 1 &&
+            tzImagePickerVc.allowCrop &&
+            tzImagePickerVc.cropperProvider) {
+            /// 获取照片进行裁剪
+            [tzImagePickerVc showProgressHUD];
+            [[TZImageManager manager] getOriginalPhotoDataWithAsset:model.asset completion:^(NSData *data, NSDictionary *info, BOOL isDegraded) {
+                [tzImagePickerVc hideProgressHUD];
+                UIImage *image = [[UIImage alloc] initWithData:data];
+                UIViewController<TZImageCropper> *vc = tzImagePickerVc.cropperProvider(image);
+                if (vc) {
+                    typeof(self) __weak weakself = self;
+                    vc.cropFinishedCallback = ^(UIImage * _Nonnull image) {
+                        [weakself didGetAllPhotos:@[image] assets:@[model.asset] infoArr:nil];
+                    };
+                    vc.cropCancelledCallback = ^{
+                        [weakself.navigationController popViewControllerAnimated:YES];
+                    };
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else {
+                    defaultAction();
+                }
+            }];
+        } else {
+            defaultAction();
+        }
     }
 }
 

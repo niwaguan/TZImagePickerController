@@ -93,6 +93,7 @@
 		D6E20C8026BFE7F800FEE250 /* UIButton+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E20C7E26BFE7F800FEE250 /* UIButton+TZImagePicker.m */; };
 		D6E20C8126BFE7F800FEE250 /* UIButton+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E20C7E26BFE7F800FEE250 /* UIButton+TZImagePicker.m */; };
 		D6E20C8326BFEC2900FEE250 /* TZViewControllerRotationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E20C8226BFEC2900FEE250 /* TZViewControllerRotationHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6E20C8526C0F31600FEE250 /* TZImageCropper.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E20C8426C0F31600FEE250 /* TZImageCropper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,6 +220,7 @@
 		D6E20C7D26BFE7F800FEE250 /* UIButton+TZImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+TZImagePicker.h"; sourceTree = "<group>"; };
 		D6E20C7E26BFE7F800FEE250 /* UIButton+TZImagePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+TZImagePicker.m"; sourceTree = "<group>"; };
 		D6E20C8226BFEC2900FEE250 /* TZViewControllerRotationHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TZViewControllerRotationHandler.h; sourceTree = "<group>"; };
+		D6E20C8426C0F31600FEE250 /* TZImageCropper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TZImageCropper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -387,6 +389,7 @@
 				D6E20C7D26BFE7F800FEE250 /* UIButton+TZImagePicker.h */,
 				D6E20C7E26BFE7F800FEE250 /* UIButton+TZImagePicker.m */,
 				D6E20C8226BFEC2900FEE250 /* TZViewControllerRotationHandler.h */,
+				D6E20C8426C0F31600FEE250 /* TZImageCropper.h */,
 				6DC358641CC8BAE300898D29 /* Resources */,
 			);
 			path = TZImagePickerController;
@@ -442,6 +445,7 @@
 				9F763A6D1FA0733700D9E526 /* NSBundle+TZImagePicker.h in Headers */,
 				9F763A6C1FA0733100D9E526 /* TZAssetModel.h in Headers */,
 				D6E20C6D26BD28F600FEE250 /* UIImage+MyBundle.h in Headers */,
+				D6E20C8526C0F31600FEE250 /* TZImageCropper.h in Headers */,
 				9F763A731FA0741D00D9E526 /* TZVideoPlayerController.h in Headers */,
 				9F763A741FA0741D00D9E526 /* TZGifPhotoPreviewController.h in Headers */,
 				D6E20C7626BFB49B00FEE250 /* UIColor+TZImagePicker.h in Headers */,
