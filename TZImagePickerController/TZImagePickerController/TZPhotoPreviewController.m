@@ -16,6 +16,7 @@
 #import "UIImage+MyBundle.h"
 #import "UIColor+TZImagePicker.h"
 #import "UIButton+TZImagePicker.h"
+#import "UIColor+TZImagePicker.h"
 
 @interface TZPhotoPreviewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate> {
     UICollectionView *_collectionView;
@@ -27,6 +28,7 @@
     UIButton *_backButton;
     UIButton *_selectButton;
     UILabel *_indexLabel;
+    UILabel *_indexAndTotalLabel;
     
     UIView *_toolBar;
     UIButton *_doneButton;
@@ -130,6 +132,12 @@
     _indexLabel.textColor = UIColor.themeHighlightForegroundColor;
     _indexLabel.textAlignment = NSTextAlignmentCenter;
     
+    _indexAndTotalLabel = [[UILabel alloc] init];
+    _indexAndTotalLabel.font = [UIFont boldSystemFontOfSize:18];
+    _indexAndTotalLabel.textAlignment = NSTextAlignmentCenter;
+    _indexAndTotalLabel.textColor = UIColor.titleColor;
+    
+    [_naviBar addSubview:_indexAndTotalLabel];
     [_naviBar addSubview:_selectButton];
     [_naviBar addSubview:_indexLabel];
     [_naviBar addSubview:_backButton];
@@ -262,12 +270,17 @@
     
     BOOL isFullScreen = self.view.tz_height == [UIScreen mainScreen].bounds.size.height;
     CGFloat statusBarHeight = isFullScreen ? [TZCommonTools tz_statusBarHeight] : 0;
-    CGFloat statusBarHeightInterval = isFullScreen ? (statusBarHeight - 20) : 0;
     CGFloat naviBarHeight = statusBarHeight + _tzImagePickerVc.navigationBar.tz_height;
     _naviBar.frame = CGRectMake(0, 0, self.view.tz_width, naviBarHeight);
-    _backButton.frame = CGRectMake(10, 10 + statusBarHeightInterval, 44, 44);
-    _selectButton.frame = CGRectMake(self.view.tz_width - 56, 10 + statusBarHeightInterval, 44, 44);
+    _backButton.frame = CGRectMake(10, statusBarHeight, 44, 44);
+    _selectButton.frame = CGRectMake(self.view.tz_width - 56, statusBarHeight, 44, 44);
     _indexLabel.frame = _selectButton.frame;
+    _indexAndTotalLabel.frame = ({
+        CGRect frame = _naviBar.bounds;
+        frame.origin.y = statusBarHeight;
+        frame.size.height -= statusBarHeight;
+        frame;
+    });
     
     _layout.itemSize = CGSizeMake(self.view.tz_width + 20, self.view.tz_height);
     _layout.minimumInteritemSpacing = 0;
@@ -567,9 +580,12 @@
     if (_selectButton.isSelected && _tzImagePickerVc.showSelectedIndex && _tzImagePickerVc.showSelectBtn) {
         NSString *index = [NSString stringWithFormat:@"%d", (int)([_tzImagePickerVc.selectedAssetIds indexOfObject:model.asset.localIdentifier] + 1)];
         _indexLabel.text = index;
+        _indexAndTotalLabel.text = [NSString stringWithFormat:@"%@/%ld", index, _tzImagePickerVc.maxImagesCount];
         _indexLabel.hidden = NO;
+        _indexAndTotalLabel.hidden = NO;
     } else {
         _indexLabel.hidden = YES;
+        _indexAndTotalLabel.hidden = YES;
     }
     _numberLabel.text = [NSString stringWithFormat:@"%zd",_tzImagePickerVc.selectedModels.count];
     _numberImageView.hidden = (_tzImagePickerVc.selectedModels.count <= 0 || _isHideNaviBar || _isCropImage);
