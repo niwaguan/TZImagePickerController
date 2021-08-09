@@ -645,9 +645,9 @@ static CGFloat itemMargin = 2;
     TZImagePickerController *tzImagePickerVc = (TZImagePickerController *)self.navigationController;
     TZAssetModel *model = tzImagePickerVc.selectedModels[index];
     NSInteger i = [self->_models indexOfObject:model];
-    if (i != NSNotFound) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
-        TZAssetCell *cell = (TZAssetCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+    TZAssetCell *cell = (TZAssetCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    if (cell) {
         [cell selectPhotoButtonClick:cell.selectPhotoButton];
     } else {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
