@@ -157,6 +157,7 @@ static CGFloat itemMargin = 2;
         [self setupAlbumsViewController];
         [self scrollCollectionViewToBottom];
         [self refreshBottomToolBarStatusWithIndex:nil];
+        [self checkIfNeedsUpdatePreview];
     });
 }
 
@@ -745,6 +746,7 @@ static CGFloat itemMargin = 2;
 - (void)albumPickerOverview:(TZAlbumPickerOverview *)view clickAtIndex:(NSInteger)index {
     TZImagePickerController *tzImagePickerVc = (TZImagePickerController *)self.navigationController;
     TZPhotoPreviewController *photoPreviewVc = [[TZPhotoPreviewController alloc] init];
+    photoPreviewVc.isPreviewSelected = YES;
     photoPreviewVc.currentIndex = index;
     photoPreviewVc.models = tzImagePickerVc.selectedModels.mutableCopy;
     [self pushPhotoPrevireViewController:photoPreviewVc];
@@ -952,6 +954,29 @@ static CGFloat itemMargin = 2;
             [strongImagePickerVc.pickerDelegate imagePickerController:strongImagePickerVc didDeselectAsset:asset photo:photo isSelectOriginalPhoto:strongSelf.isSelectOriginalPhoto];
         }
     }];
+}
+
+- (void)checkIfNeedsUpdatePreview {
+    TZPhotoPreviewController *vc = (TZPhotoPreviewController *)self.navigationController.topViewController;
+    if (![vc isKindOfClass:TZPhotoPreviewController.class]) {
+        return;
+    }
+    // 全部预览
+    if (!vc.isPreviewSelected) {
+        if (_models.count <= 0) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            vc.models = _models;
+        }
+    } else {
+        // 选中预览
+        TZImagePickerController *pickerController = (TZImagePickerController *)self.navigationController;
+        if (pickerController.selectedModels.count <= 0) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            vc.models = pickerController.selectedModels.mutableCopy;
+        }
+    }
 }
 
 #pragma mark - UIImagePickerControllerDelegate

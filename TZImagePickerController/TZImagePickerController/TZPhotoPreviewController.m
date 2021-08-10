@@ -86,9 +86,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [UIApplication sharedApplication].statusBarHidden = YES;
-    if (_currentIndex) {
-        [_collectionView setContentOffset:CGPointMake((self.view.tz_width + 20) * self.currentIndex, 0) animated:NO];
-    }
+    [self updateCollectionViewOffset];
     [self refreshNaviBarAndBottomBarState];
 }
 
@@ -226,6 +224,12 @@
     TZImagePickerController *_tzImagePickerVc = (TZImagePickerController *)self.navigationController;
     if (_tzImagePickerVc.scaleAspectFillCrop && _tzImagePickerVc.allowCrop) {
         _collectionView.scrollEnabled = NO;
+    }
+}
+
+- (void)updateCollectionViewOffset {
+    if (_currentIndex) {
+        [_collectionView setContentOffset:CGPointMake((self.view.tz_width + 20) * self.currentIndex, 0) animated:NO];
     }
 }
 
@@ -692,6 +696,24 @@
             [strongImagePickerVc.pickerDelegate imagePickerController:strongImagePickerVc didDeselectAsset:asset photo:photo isSelectOriginalPhoto:strongSelf.isSelectOriginalPhoto];
         }
     }];
+}
+
+- (void)setModels:(NSMutableArray *)models {
+    _models = models;
+    if (_models.count > 0) {
+        // 确定显示索引
+        if (self.currentIndex >= _models.count) {
+            self.currentIndex = _models.count - 1;
+        }
+        if (self.currentIndex < 0) {
+            self.currentIndex = 0;
+        }
+        [self->_collectionView reloadData];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self updateCollectionViewOffset];
+            [self refreshNaviBarAndBottomBarState];
+        });
+    }
 }
 
 @end
