@@ -1060,6 +1060,13 @@ static CGFloat itemMargin = 2;
         return;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
+        if (!self.model) {
+            [[TZImageManager manager] getCameraRollAlbumWithFetchAssets:YES completion:^(TZAlbumModel *model) {
+                self.model = model;
+                [self fetchAssetModels];
+            }];
+            return;
+        }
         PHFetchResultChangeDetails *changeDetails = [changeInstance changeDetailsForFetchResult:self.model.result];
         if (changeDetails == nil) {
             return;
