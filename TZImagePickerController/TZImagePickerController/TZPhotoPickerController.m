@@ -156,6 +156,7 @@ static CGFloat itemMargin = 2;
         [self setupSelectedOverview];
         [self setupAlbumsViewController];
         [self scrollCollectionViewToBottom];
+        [self refreshBottomToolBarStatusWithIndex:nil];
     });
 }
 
@@ -256,6 +257,7 @@ static CGFloat itemMargin = 2;
         return;
     }
     _selectedOverview = [[TZAlbumPickerOverview alloc] init];
+    _selectedOverview.frame = CGRectMake(0, self.view.tz_height, 0, 0);
     _selectedOverview.delegate = self;
     [self.view addSubview:_selectedOverview];
 }
@@ -830,7 +832,7 @@ static CGFloat itemMargin = 2;
     }
 }
 
-- (void)refreshBottomToolBarStatusWithIndex:(NSIndexPath *)indexPath {
+- (void)refreshBottomToolBarStatusWithIndex:(NSIndexPath * _Nullable)indexPath {
     TZImagePickerController *tzImagePickerVc = (TZImagePickerController *)self.navigationController;
     BOOL needsShow = tzImagePickerVc.maxImagesCount > 1 && tzImagePickerVc.selectedModels.count > 0;
     BOOL isShow = self.selectedOverview.frame.origin.y < self.view.bounds.size.height;
@@ -898,17 +900,19 @@ static CGFloat itemMargin = 2;
 
 - (void)checkSelectedModels {
     TZImagePickerController *tzImagePickerVc = (TZImagePickerController *)self.navigationController;
-    NSArray *selectedModels = tzImagePickerVc.selectedModels;
-    NSMutableSet *selectedAssets = [NSMutableSet setWithCapacity:selectedModels.count];
-    for (TZAssetModel *model in selectedModels) {
-        [selectedAssets addObject:model.asset];
-    }
-    for (TZAssetModel *model in _models) {
-        model.isSelected = NO;
-        if ([selectedAssets containsObject:model.asset]) {
-            model.isSelected = YES;
+    // 将选中的models同步到所有数据中
+    NSArray *ids = tzImagePickerVc.selectedAssetIds;
+    [_models enumerateObjectsUsingBlock:^(TZAssetModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.isSelected = [ids containsObject:obj.asset.localIdentifier];
+    }];
+    
+    // 反向同步
+    [tzImagePickerVc clearSelectedModels];
+    [_models enumerateObjectsUsingBlock:^(TZAssetModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.isSelected) {
+            [tzImagePickerVc addSelectedModel:obj];
         }
-    }
+    }];
 }
 
 /// 选中/取消选中某张照片
@@ -1045,8 +1049,14 @@ static CGFloat itemMargin = 2;
         return;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
+        PHFetchResultChangeDetails *changeDetails = [changeInstance changeDetailsForFetchResult:self.model.result];
+        if (changeDetails == nil) {
+            return;
+        }
+        
         [self.model refreshFetchResult];
         [self fetchAssetModels];
+        [self.albumsViewController configTableView];
     });
 }
 
