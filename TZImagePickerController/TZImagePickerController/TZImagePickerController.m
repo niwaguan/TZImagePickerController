@@ -200,7 +200,7 @@
             _tipLabel.textAlignment = NSTextAlignmentCenter;
             _tipLabel.numberOfLines = 0;
             _tipLabel.font = [UIFont systemFontOfSize:16];
-            _tipLabel.textColor = [UIColor blackColor];
+            _tipLabel.textColor = UIColor.titleColor;
             _tipLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
             NSString *appName = [TZCommonTools tz_getAppName];
