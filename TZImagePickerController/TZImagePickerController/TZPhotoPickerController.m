@@ -112,10 +112,6 @@ static CGFloat itemMargin = 2;
     _showTakePhotoBtn = _model.isCameraRoll && ((tzImagePickerVc.allowTakePicture && tzImagePickerVc.allowPickingImage) || (tzImagePickerVc.allowTakeVideo && tzImagePickerVc.allowPickingVideo));
     // [self resetCachedAssets];
     
-    self.navigationTitleView = [TZAlbumsSwitcher albumsSwitcher];
-    self.navigationTitleView.delegate = self;
-    self.navigationItem.titleView = self.navigationTitleView;
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeStatusBarOrientationNotification:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     
     self.operationQueue = [[NSOperationQueue alloc] init];
@@ -155,6 +151,8 @@ static CGFloat itemMargin = 2;
         [self checkSelectedModels];
         [self configCollectionView];
         self->_collectionView.hidden = YES;
+        [self setupNavigationTitleView];
+        [self updateNavigationTitleView];
         [self setupSelectedOverview];
         [self setupAlbumsViewController];
         [self scrollCollectionViewToBottom];
@@ -252,6 +250,15 @@ static CGFloat itemMargin = 2;
 
 - (void)updateNavigationTitleView {
     [self.navigationTitleView updateAlbumName:self.model.name];
+}
+
+- (void)setupNavigationTitleView {
+    if (self.navigationTitleView) {
+        return;
+    }
+    self.navigationTitleView = [TZAlbumsSwitcher albumsSwitcher];
+    self.navigationTitleView.delegate = self;
+    self.navigationItem.titleView = self.navigationTitleView;
 }
 
 - (void)setupSelectedOverview {

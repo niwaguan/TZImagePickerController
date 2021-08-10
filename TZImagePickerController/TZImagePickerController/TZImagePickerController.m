@@ -406,7 +406,13 @@
         [_tipLabel removeFromSuperview];
         [_settingBtn removeFromSuperview];
 
-        [self pushPhotoPickerVc];
+//        [self pushPhotoPickerVc];
+        TZPhotoPickerController *vc = (TZPhotoPickerController *)self.topViewController;
+        if ([vc isKindOfClass:TZPhotoPickerController.class]) {
+            [[TZImageManager manager] getCameraRollAlbumWithFetchAssets:NO completion:^(TZAlbumModel *model) {
+                vc.model = model;
+            }];
+        }
         
         TZAlbumPickerController *albumPickerVc = (TZAlbumPickerController *)self.visibleViewController;
         if ([albumPickerVc isKindOfClass:[TZAlbumPickerController class]]) {
