@@ -48,6 +48,8 @@ UICollectionViewDataSource,UICollectionViewDelegate
 @property (nonatomic, strong) NSOperationQueue *operationQueue;
 @property (nonatomic, assign) BOOL isSavingMedia;
 @property (nonatomic, assign) BOOL isFetchingMedia;
+/// 是否需要在更新列表数据后重建选中的数据。在相册改变通知后需要
+@property (nonatomic, readwrite, assign) BOOL rebuildSelectedWhenModelsRefresh;
 /// navigationTitleView
 @property (nonatomic, readwrite, strong) TZAlbumsSwitcher *navigationTitleView;
 /// 已选中的视图预览
@@ -905,14 +907,16 @@ static CGFloat itemMargin = 2;
     [_models enumerateObjectsUsingBlock:^(TZAssetModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.isSelected = [ids containsObject:obj.asset.localIdentifier];
     }];
-    
-    // 反向同步
-    [tzImagePickerVc clearSelectedModels];
-    [_models enumerateObjectsUsingBlock:^(TZAssetModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.isSelected) {
-            [tzImagePickerVc addSelectedModel:obj];
-        }
-    }];
+    if (self.rebuildSelectedWhenModelsRefresh) {
+        self.rebuildSelectedWhenModelsRefresh = NO;
+        // 反向同步
+        [tzImagePickerVc clearSelectedModels];
+        [_models enumerateObjectsUsingBlock:^(TZAssetModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.isSelected) {
+                [tzImagePickerVc addSelectedModel:obj];
+            }
+        }];
+    }
 }
 
 /// 选中/取消选中某张照片
@@ -1053,7 +1057,7 @@ static CGFloat itemMargin = 2;
         if (changeDetails == nil) {
             return;
         }
-        
+        self.rebuildSelectedWhenModelsRefresh = YES;
         [self.model refreshFetchResult];
         [self fetchAssetModels];
         [self.albumsViewController configTableView];
