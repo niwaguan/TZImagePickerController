@@ -116,6 +116,8 @@ static CGFloat itemMargin = 2;
     
     self.operationQueue = [[NSOperationQueue alloc] init];
     self.operationQueue.maxConcurrentOperationCount = 3;
+    
+    _layout = [[UICollectionViewFlowLayout alloc] init];
 }
 
 - (void)fetchAssetModels {
@@ -181,7 +183,6 @@ static CGFloat itemMargin = 2;
 
 - (void)configCollectionView {
     if (!_collectionView) {
-        _layout = [[UICollectionViewFlowLayout alloc] init];
         _collectionView = [[TZCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_layout];
         _collectionView.backgroundColor = UIColor.viewControllerBackgroundColor;
         _collectionView.dataSource = self;
@@ -535,7 +536,7 @@ static CGFloat itemMargin = 2;
             cell.index = index + 1;
         } else {
             // 未找到需要更新状态
-            NSAssert(true, @"模型的isSelected属性为true，但索引未找到？？？");
+            NSAssert(false, @"模型的isSelected属性为true，但索引未找到？？？");
             model.isSelected = NO;
             cell.model = model;
             NSArray *selectedModels = [NSArray arrayWithArray:tzImagePickerVc.selectedModels];
